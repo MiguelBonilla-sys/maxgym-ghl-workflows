@@ -1,18 +1,72 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Design tokens — tema claro estilo GoHighLevel (default) + dark override.
+   Semánticos: los componentes solo usan var(--*), nunca hex directos.
+   Cambiar un token propaga por toda la UI (light/dark sin tocar JSX).
+   ═══════════════════════════════════════════════════════════════════════ */
 :root {
-  --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --mono: 'SF Mono', 'Fira Code', Consolas, monospace;
+
+  /* Superficies — GHL usa canvas gris pálido + tarjetas blancas */
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --surface-2: #f2f4f7;
+  --border: #e4e7ec;
+  --border-strong: #d0d5dd;
+
+  /* Texto */
+  --text: #101828;
+  --text-muted: #667085;
+  --text-faint: #98a2b3;
+
+  /* Primario (indigo del sistema de nodos, ajustado a light) */
+  --primary: #6366f1;
+  --primary-soft: #4f46e5;
+  --primary-tint: #eef0ff;
+
+  /* Tints semánticos (fondos suaves de estados) */
+  --success-tint: #e8f7ee;
+  --danger-tint: #feeef0;
+  --warning-tint: #fff6e6;
+  --info-tint: #eaf3ff;
+  --purple-tint: #f4efff;
+
+  /* Canvas del builder (grid punteado estilo GHL) */
+  --canvas-bg: #f7f8fa;
+  --canvas-dot: #d5dae2;
+
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --shadow: 0 1px 3px rgba(16, 24, 40, 0.1), 0 1px 2px rgba(16, 24, 40, 0.06);
+  --shadow-lg: 0 8px 24px rgba(16, 24, 40, 0.12);
+}
+
+[data-theme='dark'] {
   --bg: #0d1117;
   --surface: #161b22;
+  --surface-2: #21262d;
   --border: #30363d;
+  --border-strong: #484f58;
+
   --text: #e6edf3;
   --text-muted: #8b949e;
+  --text-faint: #6e7681;
+
   --primary: #6366f1;
-  --green: #3fb950;
-  --red: #f85149;
-  --yellow: #d29922;
-  --blue: #58a6ff;
-  --purple: #bc8cff;
-  --orange: #f0883e;
+  --primary-soft: #818cf8;
+  --primary-tint: #1e2057;
+
+  --success-tint: #0d2719;
+  --danger-tint: #2d0e0e;
+  --warning-tint: #271300;
+  --info-tint: #051d3e;
+  --purple-tint: #1e1330;
+
+  --canvas-bg: #0d1117;
+  --canvas-dot: #21262d;
+
+  --shadow-sm: none;
+  --shadow: none;
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,16 +80,36 @@ body {
 }
 
 ::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #484f58; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
 
 pre { font-family: var(--mono); }
 
-input, select, textarea, button {
-  font-family: inherit;
-  font-size: inherit;
-}
+input, select, textarea, button { font-family: inherit; font-size: inherit; }
 
-button:hover { opacity: 0.9; }
+button:hover { opacity: 0.92; }
 button:active { transform: scale(0.98); }
+
+/* React Flow — ajustes al look GHL */
+.react-flow__attribution { display: none; }
+.react-flow__controls {
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.react-flow__controls-button {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  fill: var(--text-muted);
+}
+.react-flow__controls-button:hover { background: var(--surface-2); }
+.react-flow__minimap {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.react-flow__edge-path { stroke: var(--border-strong); stroke-width: 1.5; }
+.react-flow__node { cursor: pointer; }
